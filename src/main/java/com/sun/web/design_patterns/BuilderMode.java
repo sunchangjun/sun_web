@@ -1,4 +1,4 @@
-package com.sun.web.entity;
+package com.sun.web.design_patterns;
 
 /**
  * 建造者模式demo
