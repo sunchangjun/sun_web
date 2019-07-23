@@ -4,6 +4,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.sun.web.design_patterns.BuilderMode;
 import com.sun.web.design_patterns.BuilderMode.ConcreteBuilder;
 import com.sun.web.design_patterns.CombinationMode;
+import com.sun.web.design_patterns.ObserverMode;
+import com.sun.web.design_patterns.StrategyPattern;
 import org.junit.Test;
 
 /**
@@ -18,7 +20,7 @@ public class BuildTest {
         System.out.println(JSONObject.toJSONString(BuilderMode1));
     }
 
-    @Test
+
     public void testCombinationMode(){
         CombinationMode.Composite composite=new CombinationMode.Composite("总部","管理各部门");
         composite.add(new CombinationMode.Leaf("技术部","技术开发"));
@@ -27,5 +29,22 @@ public class BuildTest {
         composite.display(10);
         System.out.println(JSONObject.toJSONString(composite));
 
+    }
+
+    public void testStrategyPattern(){
+        StrategyPattern.IStrategy concreteStrategyA= new  StrategyPattern.ConcreteStrategyA();
+        StrategyPattern strategyPattern=new StrategyPattern(concreteStrategyA);
+        strategyPattern.algorithm();
+    }
+    @Test
+    public void testObserverMode(){
+            // 灰太狼--被观察者
+            ObserverMode.Wolf wolf = new ObserverMode.Wolf();
+            // 喜羊羊--观察者
+            ObserverMode.Observer pleasantSheep = new ObserverMode.PleasantSheep();
+            // 登记观察者
+            wolf.attach(pleasantSheep);
+            // 灰太狼入侵
+            wolf.invade();
     }
 }
