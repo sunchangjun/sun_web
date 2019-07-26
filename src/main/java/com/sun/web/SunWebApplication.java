@@ -10,6 +10,7 @@ public class SunWebApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(SunWebApplication.class, args);
+
     }
 
 }
