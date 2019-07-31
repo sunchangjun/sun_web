@@ -1,7 +1,6 @@
 package com.sun.web.Base;
 
 import com.sun.web.SunWebApplication;
-import com.utils.okhttp.OkHttp3Util;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -31,11 +30,11 @@ public class OkhttpTest {
         map.put("rid","4133");
         map.put("test","true");
 
-        try {
-            response= OkHttp3Util.httpPostFormReturnString("http://fjydimg.recomusic.net/iptv-fjyd/stb/get_mv_info",map);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            response= OkHttp3Util.httpPostFormReturnString("http://fjydimg.recomusic.net/iptv-fjyd/stb/get_mv_info",map);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
         log.info(response);
     }
 
