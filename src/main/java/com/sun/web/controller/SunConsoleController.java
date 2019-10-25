@@ -1,19 +1,18 @@
 package com.sun.web.controller;
 
-import com.alibaba.fastjson.JSONObject;
 import com.sun.web.dao.IptvResVerDao;
 import com.sun.web.domain.EasyUiBaseQuery;
 import com.sun.web.domain.EasyUiListResult;
 import com.sun.web.domain.IptvResVer;
 import com.sun.web.enums.IptvObjectEnum;
 import lombok.extern.log4j.Log4j2;
-import org.apache.commons.lang3.StringUtils;
+import org.apache.logging.log4j.LogManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,15 +24,18 @@ import java.util.List;
  */
 
 @Controller
+@CrossOrigin
 @Log4j2
 public class SunConsoleController {
+    private static org.apache.logging.log4j.Logger logger2 = LogManager.getLogger(SunConsoleController.class);
+    private static final Logger logger = LoggerFactory.getLogger(SunConsoleController.class);
     @Autowired
     IptvResVerDao iptvResVerDao;
 
     @GetMapping("programlist")
     public String list(String type, Model model) {
         model.addAttribute("type", type);
-        log.debug("跳转资源页面:" + type);
+        log.info("跳转资源页面:" + type);
 
         return "program/list";
     }
@@ -46,7 +48,9 @@ public class SunConsoleController {
         result.setTotal(i);
         List<IptvResVer> vers = this.iptvResVerDao.consoleResListByType(query, (query.getPage() - 1) * query.getRows(), query.getRows());
         result.setRows(vers);
-        log.debug("返回数据:listData");
+        log.info("返回数据:listData");
+        logger.info("返回数据:listData");
+        logger2.info("返回数据:listData");
         return result;
     }
 
@@ -54,7 +58,7 @@ public class SunConsoleController {
      * 修改资源免费状态
      * @return
      */
-    @RequestMapping(value="editorResfreeStatus", produces = "application/json; charset=utf-8")
+    @PostMapping(value="editorResfreeStatus", produces = "application/json; charset=utf-8")
     @ResponseBody
     public Object editorResfreeStatus(Long rid,Integer free) {
         try {
@@ -143,7 +147,7 @@ public class SunConsoleController {
     /**
      * 编辑并保存修改后的ver,所有的[资源管理]下的对象类型,在编辑后进行保存时都使用了这个方法
      */
-    @RequestMapping("editorProgram")
+    @PostMapping("editorProgram")
     @ResponseBody
     public Object editorProgram(IptvResVer ver, MultipartFile iptvBigPoster, MultipartFile iptvSmallPoster, HttpServletRequest req) throws Exception {
 

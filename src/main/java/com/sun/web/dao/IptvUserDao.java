@@ -5,11 +5,15 @@ import com.sun.web.domain.IptvUser;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 @Mapper
 public interface IptvUserDao extends IptvGenericDao<IptvUser>{
 	
 	@Override
 	public IptvUser findById(@Param("id") int id);
+
+    List<IptvUser> findAll();
 
 	@Override
 	public void insert(IptvUser user);

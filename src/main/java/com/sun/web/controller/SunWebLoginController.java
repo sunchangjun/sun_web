@@ -2,18 +2,23 @@ package com.sun.web.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.sun.web.dao.IptvConsolePrivilegeDao;
+import com.sun.web.dao.IptvConsoleRoleDao;
+import com.sun.web.dao.IptvConsoleUserDao;
+import com.sun.web.dao.IptvUserDao;
+import com.sun.web.domain.EasyUiListResult;
 import com.sun.web.domain.IptvConsolePrivilege;
+import com.sun.web.domain.IptvConsoleUser;
+import com.sun.web.domain.IptvUser;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
@@ -28,6 +33,11 @@ public class SunWebLoginController {
     @Autowired
     private IptvConsolePrivilegeDao privilegeDao;
 
+    @Autowired
+    private IptvConsoleUserDao iptvUserDao;
+    @Autowired
+    private IptvConsoleRoleDao roleDao;
+
     private ReentrantReadWriteLock reentrantReadWriteLock = new ReentrantReadWriteLock();
 
     @ApiOperation(value="获取用户详细信息", notes="根据url的id来获取用户详细信息")
@@ -40,6 +50,26 @@ public class SunWebLoginController {
     @ResponseBody
     public JsonResult  login(){
         return new JsonResult(true,"www.baidu.com");
+    }
+
+    @GetMapping("user/list")
+    public String list() {
+        return "user/list";
+    }
+
+    @PostMapping("role/allRoles")
+    @ResponseBody
+    public Object allRoles() {
+        return roleDao.findAllRoles();
+    }
+
+    @RequestMapping("user/listData")
+    @ResponseBody
+    public Object listData() {
+        EasyUiListResult<IptvConsoleUser> liresultst=new EasyUiListResult<IptvConsoleUser>();
+        List<IptvConsoleUser> users= iptvUserDao.findAll();
+        liresultst.setRows(users);
+        return liresultst;
     }
 
     @GetMapping("/consolelogin")

@@ -3,6 +3,8 @@ package com.sun.web.dao;
 import com.sun.web.domain.IptvConsoleUser;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 public interface IptvConsoleUserDao {
     /**
      * 根据用户名查找用户信息
@@ -33,4 +35,6 @@ public interface IptvConsoleUserDao {
 	 * @param userid
 	 */
     public void updatePwdById(@Param("newPassword") String newPassword, @Param("userid") Integer userid);
+
+    List<IptvConsoleUser> findAll();
 }

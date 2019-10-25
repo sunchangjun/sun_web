@@ -13,6 +13,11 @@
          LEFT JOIN iptv_console_role r ON a.roleId = r.id
          WHERE a.id = #{userId}
     </select>
+    <select id="findAll" resultType="com.sun.web.domain.IptvConsoleUser">
+         SELECT a.*,r.name as roleName FROM iptv_console_admin a
+         LEFT JOIN iptv_console_role r ON a.roleId = r.id
+
+    </select>
     
     <select id="findAllUserForList" resultType="com.sun.web.domain.IptvConsoleUser">
          SELECT a.*,r.name as roleName FROM iptv_console_admin a

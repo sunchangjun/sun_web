@@ -13,6 +13,10 @@
 	<select id="findById" resultType="com.sun.web.domain.IptvUser">
 		SELECT * FROM iptv_user u WHERE id=#{id}
 	</select>
+
+    <select id="findAll" resultType="com.sun.web.domain.IptvUser">
+		SELECT * FROM iptv_user u
+	</select>
 	
 	<select id="countUserByDate" resultType="int">
 		SELECT COUNT(1) FROM iptv_user WHERE LEFT(create_time,10)=#{date}
