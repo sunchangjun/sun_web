@@ -3,7 +3,10 @@ package com.sun.web.interceptor;
 
 
 
+import com.alibaba.fastjson.JSONObject;
+import com.sun.web.enums.ConstantConfig;
 import lombok.extern.log4j.Log4j2;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * @author ：suncj
@@ -25,15 +29,15 @@ public class LogInSwagger2Interceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         //预先处理
         log.info("LogInSwagger2Interceptor.preHandle()");
-        //UserInfo user = (UserInfo)request.getSession().getAttribute(GlobalConst.USER_SESSION_KEY);
-
-//        if ( !"".equals(""))  {
-//            response.sendRedirect("/consolelogin");
-//            log.info("请先登录");
-//            return false;
-//        }
-        response.sendRedirect("/consolelogin");
-        return false;
+       String saveSessionMessage=(String) request.getSession().getAttribute(ConstantConfig.USER_LOGIN_SESSION);
+        log.error("sessionMessage={}",saveSessionMessage);
+        if(StringUtils.isNotBlank(saveSessionMessage)){
+            return true;
+        }else{
+            //请先登录
+            response.sendRedirect("/login/loginHtml");
+            return false;
+        }
     }
 
     @Override

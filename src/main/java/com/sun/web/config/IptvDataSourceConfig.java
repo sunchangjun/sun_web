@@ -1,14 +1,16 @@
 package com.sun.web.config;
 
 
-import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
+import com.utils.PropertiesConfig;
+import com.zaxxer.hikari.HikariDataSource;
+import com.zaxxer.hikari.pool.HikariPool;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -28,7 +30,17 @@ public class IptvDataSourceConfig {
     @Bean(name = "iptvDataSource")
     @ConfigurationProperties(prefix = "spring.datasource.druid.iptv")
     public DataSource dataSource() {
-        return DruidDataSourceBuilder.create().build();
+        HikariDataSource hikariPool=new HikariDataSource();
+        hikariPool.setJdbcUrl(PropertiesConfig.getValue("spring.datasource.druid.iptv.url"));
+        hikariPool.setUsername(PropertiesConfig.getValue("spring.datasource.druid.iptv.username"));
+        hikariPool.setPassword(PropertiesConfig.getValue("spring.datasource.druid.iptv.password"));
+        hikariPool.setDriverClassName(PropertiesConfig.getValue("spring.datasource.druid.iptv.driverClassName"));
+//        hikariPool.setUsername(PropertiesConfig.getValue(""));
+//        hikariPool.setUsername(PropertiesConfig.getValue(""));
+//        hikariPool.setUsername(PropertiesConfig.getValue(""));
+
+//        return DataSourceBuilder.create().build();
+        return hikariPool;
     }
 
     @Primary
