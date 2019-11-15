@@ -35,8 +35,6 @@ public class IptvDataSourceConfig {
         hikariPool.setUsername(PropertiesConfig.getValue("spring.datasource.druid.iptv.username"));
         hikariPool.setPassword(PropertiesConfig.getValue("spring.datasource.druid.iptv.password"));
         hikariPool.setDriverClassName(PropertiesConfig.getValue("spring.datasource.druid.iptv.driverClassName"));
-        hikariPool.setConnectionTestQuery("SELECT 1");
-        hikariPool.setAutoCommit(true);
 //        hikariPool.setUsername(PropertiesConfig.getValue(""));
 //        hikariPool.setUsername(PropertiesConfig.getValue(""));
 //        hikariPool.setUsername(PropertiesConfig.getValue(""));
