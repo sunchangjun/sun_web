@@ -32,6 +32,7 @@ public class IptvConfigController {
             if(CollectionUtils.isNotEmpty(ipconfigs)){
                 result.setTotal(ipconfigs.size());
                 result.setRows(ipconfigs);
+                result.setStatus(true);
             }
         } catch (Exception e) {
             e.printStackTrace();

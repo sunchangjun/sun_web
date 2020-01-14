@@ -13,10 +13,10 @@ public class WebConfigService implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         //注册拦截器拦截,访问swagger页面
         // 注册拦截器
-        LogInSwagger2Interceptor loginInterceptor = new LogInSwagger2Interceptor();
-        InterceptorRegistration loginRegistry = registry.addInterceptor(loginInterceptor);
+//        LogInSwagger2Interceptor loginInterceptor = new LogInSwagger2Interceptor();
+//        InterceptorRegistration loginRegistry = registry.addInterceptor(loginInterceptor);
         // 拦截路径
-        loginRegistry.addPathPatterns("/swagger-ui.html");
+//        loginRegistry.addPathPatterns("/swagger-ui.html");
 //        // 排除路径
 //        loginRegistry.excludePathPatterns("/");
 //        loginRegistry.excludePathPatterns("/login");
