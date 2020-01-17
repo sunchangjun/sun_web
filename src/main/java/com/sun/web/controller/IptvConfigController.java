@@ -5,9 +5,9 @@ import com.sun.web.dao.IptvConfigDao;
 import com.sun.web.domain.EasyUiListResult;
 import com.sun.web.domain.IptvConfig;
 import lombok.extern.log4j.Log4j2;
-import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,7 +29,7 @@ public class IptvConfigController {
         EasyUiListResult<IptvConfig> result = new EasyUiListResult<IptvConfig>();
         try {
             List<IptvConfig> ipconfigs=iptvConfigDao.findAll();
-            if(CollectionUtils.isNotEmpty(ipconfigs)){
+            if(!CollectionUtils.isEmpty(ipconfigs)){
                 result.setTotal(ipconfigs.size());
                 result.setRows(ipconfigs);
                 result.setStatus(true);

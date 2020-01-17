@@ -6,9 +6,9 @@ import com.sun.web.domain.EasyUiListResult;
 import com.sun.web.domain.IptvConfig;
 import com.sun.web.entity.IptvUserOrderStatis;
 import lombok.extern.log4j.Log4j2;
-import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -33,7 +33,7 @@ public class IptvUserOrderStatisController {
         EasyUiListResult<IptvUserOrderStatis> result = new EasyUiListResult<IptvUserOrderStatis>();
         try {
             List<IptvUserOrderStatis> ipconfigs=iptvUserOrderStatisDao.findAll();
-            if(CollectionUtils.isNotEmpty(ipconfigs)){
+            if(!CollectionUtils.isEmpty(ipconfigs)){
                 result.setTotal(ipconfigs.size());
                 result.setRows(ipconfigs);
             }
