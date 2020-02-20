@@ -32,7 +32,7 @@ public class MsgProducerController {
     public Object order(String msg,String tag) throws UnsupportedEncodingException, InterruptedException, RemotingException, MQClientException, MQBrokerException {
 
         // 创建一个消息实例，包含 topic、tag 和 消息体
-        Message message=new Message("testTopic",tag,msg.getBytes(RemotingHelper.DEFAULT_CHARSET));
+        Message message=new Message("TopicTest",tag,msg.getBytes(RemotingHelper.DEFAULT_CHARSET));
 
         //调用方法==>返回消息体
         SendResult result =service.getProducer().send(message);

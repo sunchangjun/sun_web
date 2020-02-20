@@ -21,7 +21,7 @@ public class UserES {
     @Id
     private Long id;//主键
 
-    @Field(type = FieldType.Text, analyzer = "ik_max_word")
+    @Field(type = FieldType.Auto, analyzer = "ik_max_word")
     private String userName;
     private String userPhone;
 

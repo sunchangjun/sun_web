@@ -26,9 +26,9 @@ public class MvElasticsearch {
     @Id
     private Long id;//主键
 
-    @Field(type = FieldType.Text, analyzer = "ik_max_word")
     private String mv_id;
 
+    @Field(type = FieldType.Auto, analyzer = "ik_max_word")
     private String mv_name;
 
     private String  singer_name;
